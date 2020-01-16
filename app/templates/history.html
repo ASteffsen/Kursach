@@ -9,21 +9,21 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+              <a class="nav-item nav-link" href="{{ url_for('home') }}">На главную</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if current_user.is_authenticated %}
                   {% if history.author == current_user %}
                     <div>
-                        <a class="nav-item nav-link" href="{{ url_for('new_character', history_id=history.id) }}">New Character</a>
+                        <a class="nav-item nav-link" href="{{ url_for('new_character', history_id=history.id) }}">Новый персонаж</a>
                     </div>
         {% endif %}
-                  <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
-                  <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                  <a class="nav-item nav-link" href="{{ url_for('user', user_id=current_user.id) }}">Мой аккаунт</a>
+                  <a class="nav-item nav-link" href="{{ url_for('logout') }}">Выйти</a>
               {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                <a class="nav-item nav-link" href="{{ url_for('login') }}">Войти</a>
+                <a class="nav-item nav-link" href="{{ url_for('register') }}">Зарегистрироваться</a>
               {% endif %}
             </div>
           </div>

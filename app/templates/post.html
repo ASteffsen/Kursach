@@ -6,9 +6,12 @@
       <div class="article-metadata">
         <a class="mr-2" href="#">{{ post.author.username }}</a>
         <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+
       </div>
       <h2 class="article-title">{{ post.title }}</h2>
       <p class="article-content">{{ post.content }}</p>
+        <a class="mr-2" href="{{ url_for('history', history_id=post.story.id ) }}">{{ post.story.title }}</a>
+        <a class="mr-2" href="{{ url_for('character', history_id=post.story.id, character_id=post.char.id ) }}">{{ post.char.name }}</a>
     </div>
   </article>
   <!-- Modal -->

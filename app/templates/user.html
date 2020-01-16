@@ -11,7 +11,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+              <a class="nav-item nav-link" href="{{ url_for('home') }}">На главную</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -20,7 +20,7 @@
                     <div>
                         <a class="nav-item nav-link" href="{{ url_for('new_history') }}">Новая история</a>
                     </div>
-        {% endif %}
+                  {% endif %}
                   <a class="nav-item nav-link" href="{{ url_for('account') }}">Изменить аккаунт</a>
                   <a class="nav-item nav-link" href="{{ url_for('logout') }}">Выйти</a>
               {% else %}

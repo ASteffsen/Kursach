@@ -26,13 +26,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+              <a class="nav-item nav-link" href="{{ url_for('home') }}">На главную</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if current_user.is_authenticated %}
                   <a class="nav-item nav-link" href="{{ url_for('user', user_id=current_user.id) }}">Мой аккаунт</a>
-                  <a class="nav-item nav-link" href="{{ url_for('account') }}">Изменить аккаунт</a>
                 <a class="nav-item nav-link" href="{{ url_for('logout') }}">Выйти</a>
               {% else %}
                 <a class="nav-item nav-link" href="{{ url_for('login') }}">Войти</a>
