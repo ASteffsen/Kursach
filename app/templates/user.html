@@ -1,0 +1,56 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">DemOurGes</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if current_user.is_authenticated %}
+                  {% if user == current_user %}
+                    <div>
+                        <a class="nav-item nav-link" href="{{ url_for('new_history') }}">Новая история</a>
+                    </div>
+        {% endif %}
+                  <a class="nav-item nav-link" href="{{ url_for('account') }}">Изменить аккаунт</a>
+                  <a class="nav-item nav-link" href="{{ url_for('logout') }}">Выйти</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('login') }}">Войти</a>
+                <a class="nav-item nav-link" href="{{ url_for('register') }}">Зарегистрироваться</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.about }}</p>
+            </div>
+        </div>
+  <!-- FORM HERE -->
+    {% for history in histories %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ history.author.username }}</a>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('history', history_id=history.id) }}">{{ history.title }}</a></h2>
+            <p class="article-content">{{ history.info }}</p>
+          </div>
+        </article>
+    {% endfor %}
+    </div>
+{% endblock content %}
