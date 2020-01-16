@@ -93,7 +93,7 @@ def new_history():
         db.session.add(history)
         db.session.commit()
         flash('Your story has been created!', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('history', history_id = history.id))
 
     return render_template('create_history.html', title='New History', form=form)
 
@@ -107,7 +107,7 @@ def new_character(history_id):
         db.session.add(character)
         db.session.commit()
         flash('Your character has been created!', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('character', history_id = history_id, character_id = character.id))
 
     return render_template('create_character.html', title='New History', form=form)
 
