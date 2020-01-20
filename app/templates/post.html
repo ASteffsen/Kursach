@@ -4,8 +4,14 @@
     <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2" href="#">{{ post.author.username }}</a>
+        <a class="mr-2" href="{{ url_for('user', user_id=post.user_id) }}">{{ post.author.username }}</a>
         <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+           {% if post.author == current_user %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Обновить</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Удалить</button>
+          </div>
+        {% endif %}
 
       </div>
       <h2 class="article-title">{{ post.title }}</h2>
@@ -14,5 +20,23 @@
         <a class="mr-2" href="{{ url_for('character', history_id=post.story.id, character_id=post.char.id ) }}">{{ post.char.name }}</a>
     </div>
   </article>
-  <!-- Modal -->
+    <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Удалить пост?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+          <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Удалить">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock content %}
